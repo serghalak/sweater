@@ -20,4 +20,10 @@ public class GreetingController {
         return "greeting";
     }
 
+    @GetMapping("/main")
+    public String main(Model model){
+        model.addAttribute("some","Hello user!!!");
+        System.out.println("--->main");
+        return "main";
+    }
 }
