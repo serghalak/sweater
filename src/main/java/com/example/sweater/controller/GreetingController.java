@@ -1,13 +1,21 @@
 package com.example.sweater.controller;
 
 
+import com.example.sweater.domain.Message;
+import com.example.sweater.service.MessageService;
+import com.example.sweater.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GreetingController {
+
+    @Autowired
+    private MessageService messageService;
 
     @GetMapping("/greeting")
     public String greeting(
@@ -21,9 +29,27 @@ public class GreetingController {
     }
 
     @GetMapping("/main")
-    public String main(Model model){
-        model.addAttribute("some","Hello user!!!");
-        System.out.println("--->main");
+    public String main(
+            @RequestParam(name = "filter" ,required = false,defaultValue = "")String filter
+            ,Model model){
+        Iterable<Message> messages=null;
+        if(filter==null || filter.equals("") || filter.isEmpty()){
+            messages=messageService.list();
+        }else{
+            messages=messageService.getMessageWithFilter(filter);
+        }
+
+        model.addAttribute("messages",messages);
+
+        System.out.println("--->main: "+messages);
         return "main";
+    }
+    @PostMapping("/main")
+    public String addMessage(
+            @RequestParam String text
+            ,@RequestParam String tag
+            ,Model model){
+        messageService.add(text,tag);
+        return "redirect:/main";
     }
 }
