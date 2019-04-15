@@ -5,11 +5,12 @@
     <form method="post">
         <input type="text" name="text" placeholder="enter your message" />
         <input type="text" name="tag" placeholder="tag" />
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button type="submit">Send</button>
     </form>
     <form method="get">
         <input type="text" name="filter" placeholder="filter for search" />
-
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button type="submit">Apply filter</button>
     </form>
 
