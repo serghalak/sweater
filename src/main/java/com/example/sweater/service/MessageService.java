@@ -2,6 +2,7 @@ package com.example.sweater.service;
 
 
 import com.example.sweater.domain.Message;
+import com.example.sweater.domain.User;
 import com.example.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class MessageService {
         return messageRepo.findAll();
     }
 
-    public void add(String text,String tag){
-        messageRepo.save(new Message(text,tag));
+    public void add(String text, String tag, User user){
+        messageRepo.save(new Message(text,tag,user));
         return;
     }
 

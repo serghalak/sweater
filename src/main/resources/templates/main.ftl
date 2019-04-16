@@ -20,6 +20,7 @@
     <b>${message.id}</b>
     <span>${message.text}</span>
     <i>${message.tag}</i>
+     <strong>${message.userName}</strong>
     <br />
     </#list>
 
