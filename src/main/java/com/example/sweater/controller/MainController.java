@@ -43,7 +43,7 @@ public class MainController {
         }
 
         model.addAttribute("messages",messages);
-
+        model.addAttribute("filter",filter);
         System.out.println("--->main: "+messages);
         return "main";
     }
